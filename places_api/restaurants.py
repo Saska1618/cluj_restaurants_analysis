@@ -1,5 +1,7 @@
 import requests
 import time
+import csv
+import math
 
 class Restaurant:
     def __init__(self, name, address, place_id, rating=None):
@@ -16,6 +18,7 @@ class Restaurant:
         self.place_id = place_id
         self.rating = rating
         self.reviews = []
+        self.distance_from_city_center = None
 
     def fetch_reviews(self, api_key):
         """
@@ -29,6 +32,50 @@ class Restaurant:
         
         reviews = data.get("result", {}).get("reviews", [])
         self.reviews = reviews[:50]  # Limit to 50 reviews
+
+    def calculate_distance_from_city_center(self, city_center_coordinates, api_key):
+        """
+        Calculate the distance from the restaurant to the city center using the Haversine formula.
+
+        :param city_center_coordinates: Coordinates of the city center (latitude, longitude).
+        """
+        # Restaurant's coordinates (latitude, longitude)
+        lat1, lon1 = self.get_coordinates(api_key)
+        
+        # City center coordinates (latitude, longitude)
+        lat2, lon2 = map(float, city_center_coordinates.split(","))
+        
+        # Haversine formula
+        R = 6371  # Earth radius in kilometers
+        phi1 = math.radians(lat1)
+        phi2 = math.radians(lat2)
+        delta_phi = math.radians(lat2 - lat1)
+        delta_lambda = math.radians(lon2 - lon1)
+        
+        a = math.sin(delta_phi / 2) ** 2 + math.cos(phi1) * math.cos(phi2) * math.sin(delta_lambda / 2) ** 2
+        c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+        
+        # Distance in kilometers
+        distance = R * c
+        self.distance_from_city_center = round(distance, 2)  # Round to 2 decimal places
+
+
+    def get_coordinates(self, api_key):
+        """
+        Fetch the restaurant's coordinates from the Google Places API.
+        
+        :return: Tuple of (latitude, longitude)
+        """
+        url = f"https://maps.googleapis.com/maps/api/place/details/json?placeid={self.place_id}&key={api_key}"
+        response = requests.get(url)
+        data = response.json()
+        
+        result = data.get("result", {})
+        location = result.get("geometry", {}).get("location", {})
+        lat = location.get("lat")
+        lng = location.get("lng")
+        
+        return lat, lng
 
     def __str__(self):
         """
@@ -51,6 +98,7 @@ class ClujRestaurants:
         self.radius = radius
         self.place_type = place_type
         self.restaurants = {}
+        self.city_center_coordinates = "46.770439,23.591423"
 
     def fetch_restaurants(self):
         """
@@ -72,6 +120,7 @@ class ClujRestaurants:
             
             # Add results to the restaurants dictionary using place_id as the key
             for place in data.get('results', []):
+
                 if place['place_id'] not in self.restaurants:
                     restaurant = Restaurant(
                         name=place['name'],
@@ -79,7 +128,8 @@ class ClujRestaurants:
                         place_id=place['place_id'],
                         rating=place.get('rating')
                     )
-                    # restaurant.fetch_reviews(self.api_key)
+                    restaurant.fetch_reviews(self.api_key)
+                    restaurant.calculate_distance_from_city_center(self.city_center_coordinates, self.api_key)
                     self.restaurants[place['place_id']] = restaurant
             
             # Check for next_page_token
@@ -108,6 +158,7 @@ class ClujRestaurants:
         
         :return: List of unique restaurants.
         """
+        print("Jon")
         return list(self.restaurants.values())
 
     def print_restaurants(self):
@@ -139,3 +190,21 @@ class ClujRestaurants:
             else:
                 print("  No reviews available.")
             print("\n---")
+
+    def export_to_csv(self, filename="./data/google_restaurants.csv"):
+        """
+        Export the fetched restaurant data to a CSV file.
+
+        :param filename: The name of the CSV file to save the data.
+        """
+        with open(filename, mode='w', newline='', encoding='utf-8') as file:
+            writer = csv.writer(file)
+            # Write the header
+            writer.writerow(["Name", "Address", "Rating", "Place ID", "Reviews", "Distance from Center"])
+            
+            # Write restaurant details
+            for restaurant in self.restaurants.values():
+                reviews_text = "; ".join(
+                    [f"{review['author_name']}: {review['text'][:1000]}" for review in restaurant.reviews]
+                )
+                writer.writerow([restaurant.name, restaurant.address, restaurant.rating, restaurant.place_id, reviews_text, restaurant.distance_from_city_center])
