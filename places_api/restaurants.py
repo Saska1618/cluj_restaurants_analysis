@@ -5,6 +5,10 @@ import math
 import json
 from transformers import pipeline
 
+from webscraping.scraper import scrape_restaurant_data
+
+import pandas as pd
+
 class Restaurant:
 
     emotion_analyzer = pipeline('text-classification', model='j-hartmann/emotion-english-distilroberta-base')
@@ -249,3 +253,30 @@ class ClujRestaurants:
                     [f"{review['author_name']}: {review['text'][:1000]}" for review in restaurant.reviews]
                 )
                 writer.writerow([restaurant.name, restaurant.address, restaurant.rating, restaurant.place_id, reviews_text, restaurant.distance_from_city_center])
+
+    def scrape_employee_data(self, restaurant_csv="./data/googe_restaurants.csv", employee_csv="./data/employee_data.csv", merged_csv='./data/merged_data.csv'):
+        """
+        Use the scraper to fetch employee data for the restaurants and append it to the existing restaurant CSV file.
+
+        :param restaurant_csv: The existing CSV file with restaurant details.
+        :param employee_csv: The temporary CSV file to save scraped employee data.
+        """
+        # Extract the names of the restaurants
+        restaurant_names = [restaurant.name for restaurant in self.restaurants.values()]
+        
+        # Call the scraper function to get employee data
+        scrape_restaurant_data(restaurant_names, employee_csv)
+
+        # Load both the restaurant CSV and the scraped employee data
+        try:
+            restaurant_data = pd.read_csv(restaurant_csv)
+            employee_data = pd.read_csv(employee_csv)
+
+            # Merge the two datasets on the restaurant name
+            merged_data = pd.merge(restaurant_data, employee_data, on="Name", how="left")
+
+            # Save the updated data back to the original CSV
+            merged_data.to_csv(merged_csv, index=False)
+            print(f"Updated restaurant data saved to {restaurant_csv}")
+        except Exception as e:
+            print(f"Error processing CSV files: {e}")

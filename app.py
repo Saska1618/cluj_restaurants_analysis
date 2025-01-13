@@ -15,6 +15,7 @@ import plotly.graph_objects as go
 
 from places_api.restaurants import ClujRestaurants, Restaurant
 from credentials.credentials_provider import get_gplaces_api_key
+from webscraping.scraper import scrape_restaurant_data
 
 ability_to_load_data = False
 
@@ -49,7 +50,8 @@ app_ui = ui.page_navbar(
                     "All the collected restaurants:",
                     ui.output_data_frame("restaurants_table"),
                     ui.column(3,
-                        ui.input_action_button("refresh_btn", "Refresh Data")      
+                        ui.input_action_button("refresh_btn", "Refresh Data"),
+                        #ui.input_action_button("scrape_data", "Scrape Data")      
                     )
                     
                 )
@@ -101,13 +103,28 @@ app_ui = ui.page_navbar(
                 ui.card(
                     "Search for a restaurant:",
                     ui.card(
-                        ui.tags.style("""
-                        .btn{
-                            width: 300px;
-                        }
-                        """),
-                        ui.input_text("search_query", "", placeholder="Type a restaurant name", value="bulga"),
-                        ui.input_action_button("search_btn", "Search")
+                        ui.row(
+                            ui.column(
+                                6,
+                                ui.tags.style("""
+                                    .btn{
+                                        width: 300px;
+                                    }
+                                    """),
+                                    ui.input_text("search_query", "", placeholder="Type a restaurant name", value="bulga"),
+                                    ui.input_action_button("search_btn", "Search"
+                                )
+                            ),
+                            ui.column(
+                                6,
+                                ui.card(
+                                    "Employee number",
+                                    ui.output_text("employee_num")
+                                )
+                            )
+                            
+                        )
+                        
                     ),
                     ui.card(
                         "Name",
@@ -182,12 +199,14 @@ def server(input, output, session):
 
         json_file_path = './data/reviews_with_emotions_google.json'
 
-        #print("Loading the data")
-        #if os.path.exists(json_file_path):
-        #    # Delete the file
-        #    os.remove(json_file_path)
-        #restaurants.fetch_restaurants()
-        #restaurants.export_to_csv(data_file)
+        if ability_to_load_data:
+            print("Loading the data")
+            if os.path.exists(json_file_path):
+               # Delete the file
+               os.remove(json_file_path)
+            restaurants.fetch_restaurants()
+            restaurants.export_to_csv(data_file)
+            restaurants.scrape_employee_data()
         print("The data is loaded")
 
         # Load the CSV data
@@ -356,6 +375,17 @@ def server(input, output, session):
 
         if len(results['Name'].tolist()) > 0:
             return results['Distance from Center'].tolist()[0]
+        return "No such place"
+    
+    @render.text
+    @reactive.event(input.search_btn, ignore_none=False)
+    def employee_num():
+        df = pd.read_csv(data_file)
+        query = input.search_query().strip().lower()
+        results = df[df['Name'].str.lower().str.contains(query, na=False)]
+
+        if len(results['Name'].tolist()) > 0:
+            return scrape_restaurant_data([results['Name'].tolist()[0]])
         return "No such place"
     
     @render.plot
