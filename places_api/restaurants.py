@@ -2,8 +2,13 @@ import requests
 import time
 import csv
 import math
+import json
+from transformers import pipeline
 
 class Restaurant:
+
+    emotion_analyzer = pipeline('text-classification', model='j-hartmann/emotion-english-distilroberta-base')
+
     def __init__(self, name, address, place_id, rating=None):
         """
         Initialize a Restaurant instance.
@@ -20,7 +25,7 @@ class Restaurant:
         self.reviews = []
         self.distance_from_city_center = None
 
-    def fetch_reviews(self, api_key):
+    def fetch_reviews(self, api_key, json_file):
         """
         Fetch reviews for this restaurant from the Google Places API.
 
@@ -32,6 +37,49 @@ class Restaurant:
         
         reviews = data.get("result", {}).get("reviews", [])
         self.reviews = reviews[:50]  # Limit to 50 reviews
+
+        # Analyze emotions and save to JSON
+        review_data = []
+        for review in self.reviews:
+            text = review.get("text", "")
+            if text:
+                emotion_results = self.emotion_analyzer(text[:512])
+                if emotion_results:
+                    emotion = emotion_results[0]['label']
+                    confidence = emotion_results[0]['score']
+                else:
+                    emotion = "Unknown"
+                    confidence = 0.0
+
+                review_entry = {
+                    "restaurant_name": self.name,
+                    "review_text": text,
+                    "emotion": emotion,
+                    "confidence": confidence
+                }
+                review_data.append(review_entry)
+
+        # Write to JSON file
+        self._write_to_json(json_file, review_data)
+
+    @staticmethod
+    def _write_to_json(json_file, review_data):
+        """
+        Write review data to a JSON file.
+
+        :param json_file: Path to the JSON file.
+        :param review_data: List of reviews with emotions.
+        """
+        try:
+            with open(json_file, "r", encoding="utf-8") as file:
+                existing_data = json.load(file)
+        except (FileNotFoundError, json.JSONDecodeError):
+            existing_data = []
+
+        existing_data.extend(review_data)
+
+        with open(json_file, "w", encoding="utf-8") as file:
+            json.dump(existing_data, file, ensure_ascii=False, indent=4)
 
     def calculate_distance_from_city_center(self, city_center_coordinates, api_key):
         """
@@ -84,6 +132,7 @@ class Restaurant:
         return f"Name: {self.name}, Address: {self.address}, Rating: {self.rating if self.rating else 'N/A'}"
 
 class ClujRestaurants:
+
     def __init__(self, api_key, locations, radius=5000, place_type="restaurant"):
         """
         Initialize the ClujRestaurants class.
@@ -100,27 +149,20 @@ class ClujRestaurants:
         self.restaurants = {}
         self.city_center_coordinates = "46.770439,23.591423"
 
-    def fetch_restaurants(self):
+    def fetch_restaurants(self, json_file="./data/reviews_with_emotions_google.json"):
         """
         Fetch unique restaurants from the Google Places API for all locations.
         """
         for loc in self.locations:
-            self._fetch_from_location(loc)
+            self._fetch_from_location(loc, json_file)
 
-    def _fetch_from_location(self, location):
-        """
-        Fetch restaurants for a single location, handling pagination and deduplication.
-
-        :param location: Latitude and longitude as a string (e.g., "46.770439,23.591423").
-        """
+    def _fetch_from_location(self, location, json_file):
         url = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={location}&radius={self.radius}&type={self.place_type}&key={self.api_key}"
         while url:
             response = requests.get(url)
             data = response.json()
             
-            # Add results to the restaurants dictionary using place_id as the key
             for place in data.get('results', []):
-
                 if place['place_id'] not in self.restaurants:
                     restaurant = Restaurant(
                         name=place['name'],
@@ -128,14 +170,13 @@ class ClujRestaurants:
                         place_id=place['place_id'],
                         rating=place.get('rating')
                     )
-                    restaurant.fetch_reviews(self.api_key)
+                    restaurant.fetch_reviews(self.api_key, json_file)
                     restaurant.calculate_distance_from_city_center(self.city_center_coordinates, self.api_key)
                     self.restaurants[place['place_id']] = restaurant
             
-            # Check for next_page_token
             next_page_token = data.get('next_page_token')
             if next_page_token:
-                time.sleep(2)  # Pause to allow the token to become valid
+                time.sleep(2)
                 url = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?pagetoken={next_page_token}&key={self.api_key}"
             else:
                 break
