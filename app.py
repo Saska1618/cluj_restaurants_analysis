@@ -20,7 +20,8 @@ from webscraping.scraper import scrape_restaurant_data
 ability_to_load_data = False
 
 API_KEY = get_gplaces_api_key()
-data_file = './data/google_restaurants.csv'
+#data_file = './data/google_restaurants.csv'
+data_file = './data/merged_data.csv'
 
 locations = [
         "46.770439,23.591423",
@@ -207,6 +208,7 @@ def server(input, output, session):
             restaurants.fetch_restaurants()
             restaurants.export_to_csv(data_file)
             restaurants.scrape_employee_data()
+            restaurants.merge_csvs(restaurant_csv="./data/google_restaurants.csv", employee_csv="./data/employee_data.csv", merged_csv='./data/merged_data.csv')
         print("The data is loaded")
 
         # Load the CSV data

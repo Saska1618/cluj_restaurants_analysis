@@ -267,10 +267,14 @@ class ClujRestaurants:
         # Call the scraper function to get employee data
         scrape_restaurant_data(restaurant_names, employee_csv)
 
+    def merge_csvs(self, restaurant_csv="./data/google_restaurants.csv", employee_csv="./data/employee_data.csv", merged_csv='./data/merged_data.csv'):
         # Load both the restaurant CSV and the scraped employee data
         try:
             restaurant_data = pd.read_csv(restaurant_csv)
+            print("olvas")
             employee_data = pd.read_csv(employee_csv)
+
+            print("eddig")
 
             # Merge the two datasets on the restaurant name
             merged_data = pd.merge(restaurant_data, employee_data, on="Name", how="left")

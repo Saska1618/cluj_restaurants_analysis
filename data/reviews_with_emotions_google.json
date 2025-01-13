@@ -4621,6 +4621,12 @@
     },
     {
         "restaurant_name": "NORDSEE",
+        "review_text": "We just love their fish soup. My child loves any fish so its always a win to go there. What I am really impressed with is the attention of their staff to their clients’ needs. And today, the gentleman who seemed to be in a higher position given his grey shirt, was kind enough to voluntarily exchange my fish with a more fresher one after checking my tray. I didn’t even notice it was a little too fried and dry (which i didnt mind). However, I excepted and we got the freshest slice of fish. Well done, Nordsee.",
+        "emotion": "surprise",
+        "confidence": 0.6196319460868835
+    },
+    {
+        "restaurant_name": "NORDSEE",
         "review_text": "Food court with seafood at Iulius mall. I ordered salmon paella, the price is 35 lei per serving. Fast service. Delicious and warm paella, which is important. Thanks!",
         "emotion": "neutral",
         "confidence": 0.5084543824195862
@@ -4642,12 +4648,6 @@
         "review_text": "I was very surprised to come across such a place with a great variety of very tempting and seemingly fresh sea food and fish. I was prepared to give it a try after a good gym session and it did not dissapoint. The raw oyster on ice was very fresh and tasty, very well presented and prepared on the spot, high quality product at high end restaurant level (fresh taste, thoroughly cleaned shells, no shell fragments after being cleaned, only thing that did not make you feel you re in a high end restaurant was the fact that you were serving it in a mall and the lack of the usual utensils). For main I chose the grilled perch which was just being prepared on the grill, with sides basmati and wild rice. It was fantastic, way beyond expectations for what you would find in a foodcourt in a mall. And the best part was not yet even mentioned, which was the staff that was absolutely hospitable, smart and very attentive to details and client experience. Can t wait to return in Cluj to have another reason to eat some great fish and seafood at this place!",
         "emotion": "surprise",
         "confidence": 0.9747971296310425
-    },
-    {
-        "restaurant_name": "NORDSEE",
-        "review_text": "Nordsee experience, same prices as Bucharest, not many clients, but great taste and the only fish \"experience\" worth having, in the area.",
-        "emotion": "neutral",
-        "confidence": 0.5955056548118591
     },
     {
         "restaurant_name": "Bussola",
