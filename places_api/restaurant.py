@@ -1,7 +1,7 @@
 import requests
 import math
 import json
-from transformers import pipeline
+from transformers import pipeline # type: ignore
 import os
 
 from webscraping.scraper import scrape_restaurant_data
@@ -35,6 +35,7 @@ class Restaurant:
 
         :param api_key: Google Places API key.
         """
+        print("FETCHING REVIEWS")
         url = f"https://maps.googleapis.com/maps/api/place/details/json?placeid={self.place_id}&key={api_key}"
         response = requests.get(url)
         data = response.json()
@@ -64,10 +65,8 @@ class Restaurant:
                 review_data.append(review_entry)
 
         # Write to JSON file
+        print("WRITING TO JSON")
         if json_file is not None:
-            if os.path.exists(json_file):
-               # Delete the file
-               os.remove(json_file)
             self._write_to_json(json_file, review_data)
 
     @staticmethod
@@ -78,6 +77,7 @@ class Restaurant:
         :param json_file: Path to the JSON file.
         :param review_data: List of reviews with emotions.
         """
+        print("WRITING")
         try:
             with open(json_file, "r", encoding="utf-8") as file:
                 existing_data = json.load(file)

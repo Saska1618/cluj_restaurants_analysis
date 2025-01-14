@@ -35,10 +35,11 @@ class ClujRestaurants:
 
     def _fetch_from_location(self, location, json_file):
         url = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={location}&radius={self.radius}&type={self.place_type}&key={self.api_key}"
+
         while url:
             response = requests.get(url)
             data = response.json()
-            
+
             for place in data.get('results', []):
                 if place['place_id'] not in self.restaurants:
                     restaurant = Restaurant(
@@ -48,6 +49,7 @@ class ClujRestaurants:
                         rating=place.get('rating')
                     )
                     restaurant.fetch_reviews(self.api_key, json_file)
+                    restaurant.load_reviews_from_json()
                     restaurant.calculate_distance_from_city_center(self.city_center_coordinates, self.api_key)
                     self.restaurants[place['place_id']] = restaurant
             
@@ -93,8 +95,9 @@ class ClujRestaurants:
             
             # Write restaurant details
             for restaurant in self.restaurants.values():
+                print(restaurant.reviews)
                 reviews_text = "; ".join(
-                    [f"{review['author_name']}: {review['text'][:1000]}" for review in restaurant.reviews]
+                    [f"{review['review_text'][:1000]}" for review in restaurant.reviews]
                 )
                 writer.writerow([restaurant.name, restaurant.address, restaurant.rating, restaurant.place_id, reviews_text, restaurant.distance_from_city_center])
 
@@ -115,10 +118,7 @@ class ClujRestaurants:
         # Load both the restaurant CSV and the scraped employee data
         try:
             restaurant_data = pd.read_csv(restaurant_csv)
-            print("olvas")
             employee_data = pd.read_csv(employee_csv)
-
-            print("eddig")
 
             # Merge the two datasets on the restaurant name
             merged_data = pd.merge(restaurant_data, employee_data, on="Name", how="left")
@@ -169,19 +169,32 @@ class ClujRestaurants:
             print(f"Error loading data from {filename}: {e}")
 
     def full_refresh(self, data_file='./data/merged_data.csv'):
+        json_file = './data/reviews_with_emotions_google.json'
+        if os.path.exists(json_file):
+            # Delete the file
+            os.remove(json_file)
         self.fetch_restaurants()
         self.export_to_csv(data_file)
         self.scrape_employee_data()
         self.merge_csvs(restaurant_csv="./data/google_restaurants.csv", employee_csv="./data/employee_data.csv", merged_csv='./data/merged_data.csv')
+        self.load_from_csv()
 
     def refresh_restaurants(self, data_file='./data/merged_data.csv'):
-        self.fetch_restaurants()
+        self.restaurants = {}
+        json_file = './data/reviews_with_emotions_google.json'
+        if os.path.exists(json_file):
+            # Delete the file
+            print("JSON DELETED")
+            os.remove(json_file)
+        self.fetch_restaurants(json_file)
         self.export_to_csv(data_file)
         self.merge_csvs(restaurant_csv="./data/google_restaurants.csv", employee_csv="./data/employee_data.csv", merged_csv='./data/merged_data.csv')
+        self.load_from_csv()
 
     def scrape_refresh(self):
         self.scrape_employee_data()
         self.merge_csvs(restaurant_csv="./data/google_restaurants.csv", employee_csv="./data/employee_data.csv", merged_csv='./data/merged_data.csv')
+        self.load_from_csv()
 
     def get_display_restaurant_data(self):
         """

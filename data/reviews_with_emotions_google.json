@@ -115,9 +115,9 @@
     },
     {
         "restaurant_name": "The Doner Place",
-        "review_text": "Think twice if you want to order food through delivery. First of all, they handle the delivery themselves even if you order with Glovo. There are no updates about the delivery, no status, nothing. We had to wait 2 hours for 2 plates when, initially, they gave out an estimate up to 70 minutes, which is still massive. Get your act together or stop delivering!",
-        "emotion": "anger",
-        "confidence": 0.4784538149833679
+        "review_text": "I ordered the food at 5:30PM, it arrived at 8:00.\nThe food was delivered by taxi, I had to dress up and go outside to pick it up from the taxi driver.\nThe food was cold and dry, the meat seemed to be old and not tasty at all.\nThe food panda operator told me that they were overwhelmed by the orders, which is fine. My question is: why on earth don't you stop the app if you cannot handle the orders to keep the quality of your service?\nOf course, the question is a rethorical one. To make as much money as possible, no matter what the quality is.\nI will never order again and I don't recommend at all.",
+        "emotion": "surprise",
+        "confidence": 0.685279905796051
     },
     {
         "restaurant_name": "UBB Casa Universitarilor",
@@ -439,9 +439,9 @@
     },
     {
         "restaurant_name": "Nuka Bistro",
-        "review_text": "Sofisticated location in the middle of the city , flavius is a good Waiter , i personally prefer to have more dishes to choose but its ok for last minute restaurant",
+        "review_text": "The food was great, and so the drinks. The staff looked friendly, one of them was really noisy and goofy.",
         "emotion": "joy",
-        "confidence": 0.9238092303276062
+        "confidence": 0.735690176486969
     },
     {
         "restaurant_name": "Nuka Bistro",
@@ -601,15 +601,15 @@
     },
     {
         "restaurant_name": "Klausen Burger",
-        "review_text": "Amazing atmosphere, with several tables to take place.\nFood is basic, nothing extraordinary.\nKind waiters. They served quiet fast.\nTried some beers and a cocktail.",
-        "emotion": "neutral",
-        "confidence": 0.7167437076568604
-    },
-    {
-        "restaurant_name": "Klausen Burger",
         "review_text": "Best goulash in town. Besides that, the food is good, nothing out of the ordinary. The only downside was that the server was busy kissing another server and forgot one of our orders.",
         "emotion": "disgust",
         "confidence": 0.4534599781036377
+    },
+    {
+        "restaurant_name": "Klausen Burger",
+        "review_text": "Amazing atmosphere, with several tables to take place.\nFood is basic, nothing extraordinary.\nKind waiters. They served quiet fast.\nTried some beers and a cocktail.",
+        "emotion": "neutral",
+        "confidence": 0.7167437076568604
     },
     {
         "restaurant_name": "Klausen Burger",
@@ -679,15 +679,15 @@
     },
     {
         "restaurant_name": "Da Pino",
-        "review_text": "As always, a unique experience.\n\nThe place has an amazing atmosphere for any occasion. It's elegant yet cozy, perfect for everything from a casual dinner to a special celebration. The decor is beautiful, creating a warm and inviting vibe that makes every visit special.\n\nHighly recommended! :)",
-        "emotion": "joy",
-        "confidence": 0.8302261233329773
-    },
-    {
-        "restaurant_name": "Da Pino",
         "review_text": "The atmosphere was great, portions are quite big, but I expected something more for the higher price tag. The dessert was homemade, which should be healthier, and I appreciate it (even if it wasn't something very special).\nCarbonara was good, with the original recipe (pecorino and guanciale) , and the mussles were also great, but some of them were empty.\nWe reserved a table in the garden, but there were no places there when we arrived, so we stayed in front of the restaurant, which was also ok.\nAll in all, I recommend the place.",
         "emotion": "neutral",
         "confidence": 0.5541017651557922
+    },
+    {
+        "restaurant_name": "Da Pino",
+        "review_text": "Nice place to eat in Cluj. We had dinner here, with pre reservations . We were encouraged to stay in the garden even though it was 9:30 pm and 18 degrees outside:) This beautiful girl that welcomed us was charming enough to convince us :)\nBut… in the garden it was a very romantic atmosphere. They had blankets so I didn’t felt the cold from outside.\nWe’ve eat an appetizer first , than we shared a dish recommended for 2 persons. The food was delicious !\nThe prices are commensurate with the dishes and the central position of the restaurant.\nWe haven’t try dessert…but we come back next time .",
+        "emotion": "joy",
+        "confidence": 0.8812452554702759
     },
     {
         "restaurant_name": "Pizza Piemonte",
@@ -955,9 +955,9 @@
     },
     {
         "restaurant_name": "Marco Polo Restaurant",
-        "review_text": "I recently dined at the Marco Polo restaurant at the Hilton Hotel in Cluj-Napoca, and the experience was truly exceptional, thanks to my waiter, Denis. From the moment I arrived, Denis welcomed me with a joyful and kind demeanor that set the tone for the evening. His warm hospitality and genuine enthusiasm made me feel right at home.\n\nDenis was not only attentive but also incredibly helpful, providing excellent recommendations and ensuring my dining experience was nothing short of perfect. His professionalism, combined with his friendly nature, truly stood out. He anticipated my needs and went above and beyond to make my meal memorable.\n\nIn a city known for its hospitality, Denis is undoubtedly the best in Cluj-Napoca. If you’re looking for a top-notch dining experience, be sure to ask for Denis at Marco Polo – he will elevate your visit with his outstanding service.\n\nThank you, Denis, for making my evening so special!",
-        "emotion": "joy",
-        "confidence": 0.9926026463508606
+        "review_text": "The place is very elegant. Service is great. Food not so much 😔. We had the spring rolls. If you're not a fan of mushrooms, stay away. They could've paired it with some sweet and sour sauce instead of soy sauce. For our main course, we had the chicken tikka masala. I would pass on this dish because it doesn't taste like tikka masala whatsoever.",
+        "emotion": "neutral",
+        "confidence": 0.7379151582717896
     },
     {
         "restaurant_name": "Snack & Coffee",
@@ -1531,9 +1531,9 @@
     },
     {
         "restaurant_name": "Napoli Centrale",
-        "review_text": "Good food. I had pizza, pasta and desert.\nI really enjoyed the pizza, the dough was the real deal. The pasta was homemade and dessert was fine.",
+        "review_text": "A very nice place with good food, pastas are not as good as pizzas, the personal is nice and fast, and the atmosphere is really nice, the garden is amazing",
         "emotion": "joy",
-        "confidence": 0.9709997773170471
+        "confidence": 0.9533148407936096
     },
     {
         "restaurant_name": "Hugo City",
@@ -1975,21 +1975,21 @@
     },
     {
         "restaurant_name": "Claro",
+        "review_text": "I had lunch here multiple times, I'm seeing some issues repeatedly the food is cold sometimes. The place does not accept sodexo (or similar cards). Lastly I had the chance to pay for some \"pui cu sos alb\" 13 RON that was defenetly burnt.\n\nI love to see some catering competition nearby but this is not a good start.",
+        "emotion": "sadness",
+        "confidence": 0.4277935028076172
+    },
+    {
+        "restaurant_name": "Claro",
         "review_text": "The food is great, the portions are more than enough. If i had to complain then I would talk about you cant pay with sodexo yet, but I think that's a minor issue. I like this place.",
         "emotion": "joy",
         "confidence": 0.7193424105644226
     },
     {
         "restaurant_name": "Claro",
-        "review_text": "Tasty food but not extraordinary. The prices are as in restaurant even that this place is not a restaurant. It s a canteen.\nThey are taking advantage of being one of the few canteens in the area.",
+        "review_text": "A very decent place for food if you work in the area. The food is always fresh and very tasty. You also have around 6-8 different choices.",
         "emotion": "neutral",
-        "confidence": 0.4696061313152313
-    },
-    {
-        "restaurant_name": "Claro",
-        "review_text": "Food is good enough and the portions are big. It's not a cheap place to eat, but between Claro and La Casa (same prices) I would recommend Claro.",
-        "emotion": "neutral",
-        "confidence": 0.7591293454170227
+        "confidence": 0.4801635444164276
     },
     {
         "restaurant_name": "Restaurant Autoservire",
@@ -2161,6 +2161,12 @@
     },
     {
         "restaurant_name": "Papabox Cluj",
+        "review_text": "Absolutely terrible food. Until frozen pizza is better too. I put salami on any kind of pizza, they all taste the same and the dough is frozen. I ordered garlic sauce, which I didn't get, instead I got cocktail sauce that just tasted sour. I don't recommend it even if you're starving. You're better off eating a gas station sandwich.",
+        "emotion": "disgust",
+        "confidence": 0.9459349513053894
+    },
+    {
+        "restaurant_name": "Papabox Cluj",
         "review_text": "I ordered 3 times from them, twice I was missing products, plus the pizza came with the seal detached",
         "emotion": "neutral",
         "confidence": 0.4817334711551666
@@ -2170,12 +2176,6 @@
         "review_text": "A frozen pizza at a restaurant price... Raw crust... not even the ingredients on the pizza are fresh.\nUnder any criticism.",
         "emotion": "disgust",
         "confidence": 0.5604427456855774
-    },
-    {
-        "restaurant_name": "Papabox Cluj",
-        "review_text": "The best pizza, I have been ordering from you for some time and I am very satisfied! With how many orders I've made, I think I deserve one for free :)))",
-        "emotion": "joy",
-        "confidence": 0.9635240435600281
     },
     {
         "restaurant_name": "Cimbru Restaurant",
@@ -2311,15 +2311,15 @@
     },
     {
         "restaurant_name": "Risto Madness House",
-        "review_text": "Located on the 3rd floor, quite hard to find but tasty food and friendly service",
-        "emotion": "joy",
-        "confidence": 0.7388207912445068
+        "review_text": "I ordered 5 breakfast, after waiting 1 hour we were told that they did not even start, that they have delivery orders with priority. The woman who wiped the table with her bare hand kneaded the dough with her bare hands. zero hygiene, zero customer reception.",
+        "emotion": "disgust",
+        "confidence": 0.7867820262908936
     },
     {
         "restaurant_name": "Risto Madness House",
-        "review_text": "Decent prices. All courses are good, especially the pizza.",
-        "emotion": "neutral",
-        "confidence": 0.49303847551345825
+        "review_text": "Located on the 3rd floor, quite hard to find but tasty food and friendly service",
+        "emotion": "joy",
+        "confidence": 0.7388207912445068
     },
     {
         "restaurant_name": "Risto Madness House",
@@ -2485,15 +2485,15 @@
     },
     {
         "restaurant_name": "Vagabundos Place",
-        "review_text": "Very warm and cozy ambiance, the food and coffee were amazing. Would recomend",
+        "review_text": "Very good experience, the coffee is great, the food is also amazing, can’t wait to visit again.\nHighly recommend",
         "emotion": "joy",
-        "confidence": 0.940274715423584
+        "confidence": 0.946880578994751
     },
     {
         "restaurant_name": "Vagabundos Place",
-        "review_text": "10/10 for everything! We have been  ordering from their food truck up until now and it was extraordinary. But now that they also have a place, the atmosphere and the staff just completes everything. Totally recommend. :)",
-        "emotion": "surprise",
-        "confidence": 0.8139622807502747
+        "review_text": "Very warm and cozy ambiance, the food and coffee were amazing. Would recomend",
+        "emotion": "joy",
+        "confidence": 0.940274715423584
     },
     {
         "restaurant_name": "Stradale Someșului",
@@ -2725,6 +2725,12 @@
     },
     {
         "restaurant_name": "Alex & George Boutique Hotel",
+        "review_text": "Room was ok, windows could be better as you will hear all traffic from outside.\nBathrooms dont look like in the pictures, the shower is yellowish with many black spots. It did look hygenic\nWhole hotel smells like lebanese food but its not a dealbreaker.\nIts fairy close to city center, and the staff was super friendly.\nBreakfast is nice and the lebanese restaurant is ok.",
+        "emotion": "neutral",
+        "confidence": 0.6676799058914185
+    },
+    {
+        "restaurant_name": "Alex & George Boutique Hotel",
         "review_text": "The room smelled like libanese food even if we stayed on the 4th floor. Maybe all hotel smelled like the libanese restaurant that it's situated on the hotel's ground floor. The room was clean and tidy, excepting the windows. I liked the view over Cluj, but I wouldn't stay there in the future trips to Cluj because of the smell in the room.",
         "emotion": "disgust",
         "confidence": 0.8468190431594849
@@ -2746,12 +2752,6 @@
         "review_text": "The food was good but the conditions of rooms are not like in pictures. The bathroom is yellowed and unhygienic, the walls are gray, not white, contains stains, and the window is not closing.",
         "emotion": "disgust",
         "confidence": 0.6316331028938293
-    },
-    {
-        "restaurant_name": "Alex & George Boutique Hotel",
-        "review_text": "The hotel was pleasant with a handy restaurant below. The main thing was the staff, every single team member was super welcoming and willing to help. Really good work! I would stay here again as the room was spacious and comfortable.",
-        "emotion": "joy",
-        "confidence": 0.894460916519165
     },
     {
         "restaurant_name": "Hotel Olimp",
@@ -2923,15 +2923,15 @@
     },
     {
         "restaurant_name": "Buena Vista",
-        "review_text": "Now this is the place to eat a decent food for a fair amount of money. Taking cash, cards and once in a while for regulars they give free meal or at least a discount up to 30%. Great budget place.",
+        "review_text": "This is a good place to eat during lunch, as the prices are quite fair and the portions big. You have a wide variety of dishes to choose from and they usually post their menu on their facebook page, so you can know in advance what to order.\n\nThere's quite a bit of seating available, inside and outside. If you don't want to stay there (or if there are no empty places), you can always take the food to go.\n\nThey have a Daily Menu offer which is cheaper than getting everything separately. You can also get drinks here.",
         "emotion": "neutral",
-        "confidence": 0.7700837850570679
+        "confidence": 0.9374542832374573
     },
     {
         "restaurant_name": "Buena Vista",
-        "review_text": "Friendly staff. Food is decent both when it comes to taste and price. Recommend it if you want to have a quick lunch",
+        "review_text": "Now this is the place to eat a decent food for a fair amount of money. Taking cash, cards and once in a while for regulars they give free meal or at least a discount up to 30%. Great budget place.",
         "emotion": "neutral",
-        "confidence": 0.8752898573875427
+        "confidence": 0.7700837850570679
     },
     {
         "restaurant_name": "Salad Box",
@@ -3157,6 +3157,12 @@
     },
     {
         "restaurant_name": "Wei Ramen",
+        "review_text": "A great concept with Japanese items thoughtfully arranged throughout the open space. The music selection and anime displays add a nice touch. The food is exceptional — I had one of the best ramens I've ever tasted. The service is impressive, perhaps surprisingly polished for a new place in Cluj. While prices run a bit high, the restaurant offers a distinct concept rather than being just another generic venue in Cluj.",
+        "emotion": "neutral",
+        "confidence": 0.39618954062461853
+    },
+    {
+        "restaurant_name": "Wei Ramen",
         "review_text": "100% would recommend!! We arrived right before they were about to close but they were kind enough to still serve us. We tried 3 different kinds of ramen and all of them were absolutely delicious! Can’t wait to visit this place again!",
         "emotion": "joy",
         "confidence": 0.8189618587493896
@@ -3169,21 +3175,21 @@
     },
     {
         "restaurant_name": "Wei Ramen",
-        "review_text": "On top of it being the most delicious ramen in Cluj, the place is 10/10, especially if you enjoy anime. The little details such as the music and game arcade make for a very friendly and warm atmosphere 🍜💕\n\nCan't wait to go again!",
-        "emotion": "joy",
-        "confidence": 0.9806745648384094
-    },
-    {
-        "restaurant_name": "Wei Ramen",
-        "review_text": "Everything was extraordinary. The place itself is very nice and gives you a feeling of gorgeous Japan/China. Food without words. Ramen or Japanese fried chicken or rivals with pork, shrimp and top onions. Miso ramen best. I highly recommend this location. Super cool everything. Footnote 10 ⭐⭐⭐⭐⭐",
-        "emotion": "joy",
-        "confidence": 0.7514857649803162
+        "review_text": "Parts of the restaurant are nicely decorated, but the back looks like a storeage. There were a lot of packages just dumped near the table.\n\nThe sushi taco was great. The tonkotsu ramen was ok.",
+        "emotion": "neutral",
+        "confidence": 0.7123149037361145
     },
     {
         "restaurant_name": "PIADINA fresco.urbano",
         "review_text": "The food I've eat was really great and tasty. The service was only \"there\". Special offers had no details what the food contains. And if  you have an Italian restaurant, you should spell the Italian text correctly. For that price of a Fastfood, the whole package should be better.",
         "emotion": "neutral",
         "confidence": 0.8722933530807495
+    },
+    {
+        "restaurant_name": "PIADINA fresco.urbano",
+        "review_text": "I was there 2 times, and today I just walk in, sad Hello, stand there for few minutes ( only customer), but since non of 3 employes didnt bother to say Hi or serve me, I just walk out. Really bad service, and I am sure I will never go there again!",
+        "emotion": "sadness",
+        "confidence": 0.9145486354827881
     },
     {
         "restaurant_name": "PIADINA fresco.urbano",
@@ -3202,12 +3208,6 @@
         "review_text": "Good food, good view, nice people!",
         "emotion": "joy",
         "confidence": 0.9717168211936951
-    },
-    {
-        "restaurant_name": "PIADINA fresco.urbano",
-        "review_text": "I was there 2 times, and today I just walk in, sad Hello, stand there for few minutes ( only customer), but since non of 3 employes didnt bother to say Hi or serve me, I just walk out. Really bad service, and I am sure I will never go there again!",
-        "emotion": "sadness",
-        "confidence": 0.9145486354827881
     },
     {
         "restaurant_name": "Freschissima",
@@ -3229,15 +3229,15 @@
     },
     {
         "restaurant_name": "Freschissima",
-        "review_text": "Quality of products got worse over time, so did the portion size, even to the level where it's not the advertised weight. Very bad quality/size/price ratios. Not recommended.",
-        "emotion": "disgust",
-        "confidence": 0.9287863373756409
+        "review_text": "Ordered from them, very poor quality pasta, overpriced and they forgot to put the extra toppings I ordered, I do not think the quantity of is low but the sauce and meat is barely there, would not recommend this place especially if you expect some good pasta.",
+        "emotion": "neutral",
+        "confidence": 0.7062801122665405
     },
     {
         "restaurant_name": "Freschissima",
-        "review_text": "Bad quality. The pasta taste bad. I cook better at home.",
+        "review_text": "Quality of products got worse over time, so did the portion size, even to the level where it's not the advertised weight. Very bad quality/size/price ratios. Not recommended.",
         "emotion": "disgust",
-        "confidence": 0.9407768249511719
+        "confidence": 0.9287863373756409
     },
     {
         "restaurant_name": "Fit and Healthy by London Brothers",
@@ -3283,6 +3283,12 @@
     },
     {
         "restaurant_name": "Golden Burgers",
+        "review_text": "I give 2 stars only because I have ordered enough times before, and even recommended it to friends, otherwise I would have given 1. But this time, disappointing. Half of the fries were burnt, besides they came cold (just like the burger by the way) and the bun at the bottom of the burger was hard as concrete, effectively inedible. Besides all this, the ginger drink which was one of the the best I've tasted, it was fermented, the lid still jumped when I opened it. I hope it will be a singular situation and they will recover, because they really had potential. I will definitely not order again soon.",
+        "emotion": "neutral",
+        "confidence": 0.6324400901794434
+    },
+    {
+        "restaurant_name": "Golden Burgers",
         "review_text": "I ordered yesterday for the first time, I was surprised by the generous portions, the quality of the ingredients and the fact that no frozen potatoes were used, they look like fresh potatoes, very good as I have not seen in other locations. You must try the ginger drink, it combines very well with the burger (2 mouthfuls of the drink and then you will feel the flavors of the burger much better). It should be mentioned that the order arrived very quickly. All in all it was a pleasant experience, we will order again.",
         "emotion": "surprise",
         "confidence": 0.7085710167884827
@@ -3292,12 +3298,6 @@
         "review_text": "Large portion of burger, huge portion of potatoes and the secret sauce were exemplary good. All at an affordable price.\nI confidently recommend their food to everyone. Burgers with potatoes at this price are rarely found.",
         "emotion": "neutral",
         "confidence": 0.6946379542350769
-    },
-    {
-        "restaurant_name": "Golden Burgers",
-        "review_text": "The burgers are absolutely delicious. I was very pleasantly surprised after the first order. Portions are generous and very tasty. Well cooked meat, soft buns, good hot sauces and equally tasty dessert.\nExtremely nice and generous staff. It's the kind of experience you recommend to all your loved ones!😍",
-        "emotion": "joy",
-        "confidence": 0.5012422800064087
     },
     {
         "restaurant_name": "Beefy Boys",
@@ -3385,9 +3385,9 @@
     },
     {
         "restaurant_name": "MATES PUB",
-        "review_text": "Two days ago I found out that at Mates the dog is not allowed on the terrace or inside. It is their internal policy and I accept it, but I recommend that they also put a no sign with the dog.",
-        "emotion": "neutral",
-        "confidence": 0.6382583975791931
+        "review_text": "Cool, welcoming people...superrr...We'll keep coming....maybe we'll find something like that in Brașov....bravo, congratulations and keep it up!",
+        "emotion": "joy",
+        "confidence": 0.888231635093689
     },
     {
         "restaurant_name": "Talisman",
@@ -4147,27 +4147,27 @@
     },
     {
         "restaurant_name": "Marty City",
-        "review_text": "It was a great experience to have our dinner at this place. The food was great and the customer service was amazing. Daniel shows us the real value of an amazing experience through his warmy and professional behavior.\nHe created a nice atmosphere for us. Thank you!",
-        "emotion": "joy",
-        "confidence": 0.8836398720741272
-    },
-    {
-        "restaurant_name": "Marty City",
         "review_text": "The atmosphere is relaxed and the waiters are polite and to the point, it's definitely and update from the food court. When ordering, you have a good range from where you can choose, starting with the most basic pizzas and continuing with pastas and something called Thors Hammer (intriguing). Overall I recommend this place because it's relaxed and food is good. It won't throw you on the back, but it's a good place overall",
         "emotion": "neutral",
         "confidence": 0.487535685300827
     },
     {
         "restaurant_name": "Marty City",
-        "review_text": "Very nice place with amazing views, service was excellent but the food wasn't as expected. Been there before and it was better. Appetiser was good, the main course was a bit rushed/sloppy",
-        "emotion": "joy",
-        "confidence": 0.5729946494102478
-    },
-    {
-        "restaurant_name": "Marty City",
         "review_text": "The best mixed green salad I had in a very long time! Glad to see this restaurant uses quality ingredients and has delicious recipes! Very attentive staff also. Love to come back at every opportunity.",
         "emotion": "joy",
         "confidence": 0.9804758429527283
+    },
+    {
+        "restaurant_name": "Marty City",
+        "review_text": "It was a great experience to have our dinner at this place. The food was great and the customer service was amazing. Daniel shows us the real value of an amazing experience through his warmy and professional behavior.\nHe created a nice atmosphere for us. Thank you!",
+        "emotion": "joy",
+        "confidence": 0.8836398720741272
+    },
+    {
+        "restaurant_name": "Marty City",
+        "review_text": "Very nice place with amazing views, service was excellent but the food wasn't as expected. Been there before and it was better. Appetiser was good, the main course was a bit rushed/sloppy",
+        "emotion": "joy",
+        "confidence": 0.5729946494102478
     },
     {
         "restaurant_name": "Salad Box",
@@ -4261,6 +4261,12 @@
     },
     {
         "restaurant_name": "Profi Super",
+        "review_text": "Not great, nor terrible.\n1. It's 24/7, which is great.\n2. The meat isn't always the best.\n3. Prices are higher compared to other stores, but that's expected.\n4. There are two self checkouts which is great, but they need improvement as almost always, one is broken.",
+        "emotion": "disgust",
+        "confidence": 0.6152839064598083
+    },
+    {
+        "restaurant_name": "Profi Super",
         "review_text": "Everything ok for 1st visit. Prices a bit higher but to be expected for a 24/7",
         "emotion": "neutral",
         "confidence": 0.6731109023094177
@@ -4282,12 +4288,6 @@
         "review_text": "Recently renovated inside and still not very clean. Only good aspect for now is that they are open 24/7.\nUsually you have to stay in line to pay around 5 to 20 minutes at rush hour as they are very under staffed.",
         "emotion": "neutral",
         "confidence": 0.8823832869529724
-    },
-    {
-        "restaurant_name": "Profi Super",
-        "review_text": "The only good thing is that it is a 24/7. The staff is rude and slow. Often enough they close the register while your IN LINE and you'll have to go to another one where 5 or 6 were already waiting. The produce section seems to have a lot of stuff that should not be sold anymore and the frozen food section doesn't have much except the exact things nobody buys. Really just a convenient store if you need something quick and it's on your way (provided that they actually sell what you need)",
-        "emotion": "neutral",
-        "confidence": 0.7342177629470825
     },
     {
         "restaurant_name": "Carmangeria Moldovan",
@@ -4405,9 +4405,9 @@
     },
     {
         "restaurant_name": "G&D Top Design",
-        "review_text": "A quiet location with kind people.",
-        "emotion": "joy",
-        "confidence": 0.8170759081840515
+        "review_text": "The service was good, the space nicely arranged, only for those who do not know the location well, or are going to their first wedding there, the bride and groom can mix from one wedding to another (for under 2 rooms). Appetizers: old appetizers, and the peasant potatoes were spoiled (quite beginner smell and sour taste).",
+        "emotion": "disgust",
+        "confidence": 0.9555375576019287
     },
     {
         "restaurant_name": "Shanghai Express",
@@ -4573,15 +4573,15 @@
     },
     {
         "restaurant_name": "SushiVO",
-        "review_text": "fresh and very tasty!",
-        "emotion": "joy",
-        "confidence": 0.8328922986984253
-    },
-    {
-        "restaurant_name": "SushiVO",
         "review_text": "10/10 I recommend trying Philadelphia roll from them!",
         "emotion": "joy",
         "confidence": 0.7136841416358948
+    },
+    {
+        "restaurant_name": "SushiVO",
+        "review_text": "fresh and very tasty!",
+        "emotion": "joy",
+        "confidence": 0.8328922986984253
     },
     {
         "restaurant_name": "SushiVO",
@@ -4657,6 +4657,12 @@
     },
     {
         "restaurant_name": "Bussola",
+        "review_text": "Decent food, healthy …\nSome of the best asian food in town\nBest tomato soup I ever had!",
+        "emotion": "joy",
+        "confidence": 0.6359668970108032
+    },
+    {
+        "restaurant_name": "Bussola",
         "review_text": "Horrible experience! Avocados were not ripe and this happened twice. Once I went back to tell them they had a very unpleasant attitude. I asked for spicy mayo they said they didn’t have it for 4 months with a very aggressive tone. I had the audacity of ordering something that was on the menu",
         "emotion": "disgust",
         "confidence": 0.6738105416297913
@@ -4672,12 +4678,6 @@
         "review_text": "Bussola Restaurant exceeded my expectations with their shrimp poke bowl. The flavors were amazing, especially the sauce, which added a delightful twist to the dish. Overall, the food was fantastic and I highly recommend it for a memorable dining experience.",
         "emotion": "joy",
         "confidence": 0.9089673757553101
-    },
-    {
-        "restaurant_name": "Bussola",
-        "review_text": "Delicious bowl, the beef was cooked to perfection and the ingredients were high quality and well balanced. Loved that the meat sauce was not overly sweet as it tends to happen with dishes sold as asian or asian inspired in the Iulius foodcourt. My bf tried the ribs - also cooked extremely well",
-        "emotion": "joy",
-        "confidence": 0.8716281056404114
     },
     {
         "restaurant_name": "PIADINA fresco.urbano",
@@ -4789,15 +4789,15 @@
     },
     {
         "restaurant_name": "Freschissima",
-        "review_text": "I don't understand how can you be a pasta restaurant and make so plain and mediocre pasta... Disappointed everytime I try",
-        "emotion": "sadness",
-        "confidence": 0.8516294360160828
-    },
-    {
-        "restaurant_name": "Freschissima",
         "review_text": "There is no wait here usually, so it's literally fast food. It tastes great (I had their own type), but my penne was only half done - and that's the main thing at a pasta bar 🙈 You can't let yourself down with poorly prepared pasta! Personnel could be nicer/better/more attentive, but maybe they just had a bad day..",
         "emotion": "neutral",
         "confidence": 0.8161026239395142
+    },
+    {
+        "restaurant_name": "Freschissima",
+        "review_text": "I don't understand how can you be a pasta restaurant and make so plain and mediocre pasta... Disappointed everytime I try",
+        "emotion": "sadness",
+        "confidence": 0.8516294360160828
     },
     {
         "restaurant_name": "Freschissima",
@@ -5263,9 +5263,9 @@
     },
     {
         "restaurant_name": "Taverna Racilor",
-        "review_text": "Amazing service, the most amazing seafood and cocktails, everything is incredible. Loved the atmosphere and how friendly everyone was. We were offered multiple choices and everything was paired perfectly. Loved it!! Recommend it to everyone who wants to have a great time!!! Also-great spot for aesthetic photos!",
+        "review_text": "Was here for lunch and had the Tigaie Picanta cu Fructe de Mare (hot pan with sea food), and it was delicious!!\nStaff was great, friendly and accomodating, and the food trully amazing and came very fast, as we were in a hurry",
         "emotion": "joy",
-        "confidence": 0.9212989807128906
+        "confidence": 0.9091955423355103
     },
     {
         "restaurant_name": "Trattoria de Florian",
@@ -5551,9 +5551,9 @@
     },
     {
         "restaurant_name": "Rosa",
-        "review_text": "Perfect service guys",
+        "review_text": "Nice team",
         "emotion": "neutral",
-        "confidence": 0.9518691897392273
+        "confidence": 0.5230039358139038
     },
     {
         "restaurant_name": "Berrak Kebab Restaurant",
@@ -5815,15 +5815,15 @@
     },
     {
         "restaurant_name": "La Șes",
-        "review_text": "The food is great and tasty. However the delivery is an absolute NIGHTMARE the courier always refuses to deliver the food to the door. Last time he called me to say, \"meet me downstairs\" and closed the phone on me.\nI would highly recommend anyone to AVOID ordering from this place.",
-        "emotion": "neutral",
-        "confidence": 0.883371114730835
-    },
-    {
-        "restaurant_name": "La Șes",
         "review_text": "Great place, with great staff and a really relaxing yet slightly elegant atmosphere. They are one of my favourite pizza restaurants in Cluj, to be honest, because you can tell their ingredients are fresh and of good quality. I would definitely recommend it to any pizza lover, especially because they also have amazing prices ♥️",
         "emotion": "joy",
         "confidence": 0.9278780817985535
+    },
+    {
+        "restaurant_name": "La Șes",
+        "review_text": "The food is great and tasty. However the delivery is an absolute NIGHTMARE the courier always refuses to deliver the food to the door. Last time he called me to say, \"meet me downstairs\" and closed the phone on me.\nI would highly recommend anyone to AVOID ordering from this place.",
+        "emotion": "neutral",
+        "confidence": 0.883371114730835
     },
     {
         "restaurant_name": "La Șes",
@@ -6313,6 +6313,12 @@
     },
     {
         "restaurant_name": "Profi Super",
+        "review_text": "Here you'll find a good a variety of products, including vegan, vegetarian, local, gluten free and dairy free options. Also they have a coffee corner with fresh sandwiches and sweets.\n\nThe strong point is the parking lot!\n\nThe prices vary from very decent to high, unfortunately there are  lots of products laying around the aisles, waiting to be stored on the shelves, and always line of queues, which clearly indicates they are understaffed, just like most of the Profi stores I have visited.",
+        "emotion": "neutral",
+        "confidence": 0.5023159980773926
+    },
+    {
+        "restaurant_name": "Profi Super",
         "review_text": "Extremely slow cashiers!!! Long ques and nobody is willing to open more for faster payment\n\nUpdate(07.06.2024):\nI waited 15 minutes to be served at the cooked section, there was nobody there. I asked for somebody to come and help but nobody came. Incredibly disappointed!",
         "emotion": "surprise",
         "confidence": 0.8247504830360413
@@ -6322,12 +6328,6 @@
         "review_text": "The place is old and long waiting times at the cashiers. Usually only 2 cashiers are working. I shop there sometimes when I'm nearby and need one or few items, but never a big shopping. The parking lot is usually full. Their prices are good.",
         "emotion": "neutral",
         "confidence": 0.8343604207038879
-    },
-    {
-        "restaurant_name": "Profi Super",
-        "review_text": "Recently renovated. The prices are pretty good.  You can find most of the basic ingredients you may need. However the selection can vary from time to time for some reason.  There was a period when they didn't have any mineral water for example. Also usually there is a wait at the cashier.",
-        "emotion": "neutral",
-        "confidence": 0.9384928941726685
     },
     {
         "restaurant_name": "Profi City New",
@@ -6397,6 +6397,12 @@
     },
     {
         "restaurant_name": "Pizzeria Toskana Restaurant",
+        "review_text": "Good food, fair prices, and nice serving - Florin is a really nice and friendly guy who was very helpful :)",
+        "emotion": "joy",
+        "confidence": 0.8297130465507507
+    },
+    {
+        "restaurant_name": "Pizzeria Toskana Restaurant",
         "review_text": "Perfect!",
         "emotion": "neutral",
         "confidence": 0.4703846871852875
@@ -6412,12 +6418,6 @@
         "review_text": "Good food, the staff was amazing, good serving. Thank you so much.",
         "emotion": "joy",
         "confidence": 0.8523417711257935
-    },
-    {
-        "restaurant_name": "Pizzeria Toskana Restaurant",
-        "review_text": "Good price, good pizza! One of the staff, was a little bit irritated, maybe just a bad day for her. Overall was GOD!",
-        "emotion": "surprise",
-        "confidence": 0.44807708263397217
     },
     {
         "restaurant_name": "Engels District",
@@ -6589,15 +6589,15 @@
     },
     {
         "restaurant_name": "Mama Manu BIG",
-        "review_text": "He forgets to put the sauce in the bag, too many times already. I thought it was a delivery maneuver, but apparently it is also practiced if you go to the window to order.",
-        "emotion": "neutral",
-        "confidence": 0.8339805006980896
-    },
-    {
-        "restaurant_name": "Mama Manu BIG",
         "review_text": "Catastrophic service, stale salad. I was here for the first and last time. Ordered a plate and received it to go. It was specified in the order that the potatoes should not be inserted, but they were not put aside. Communication impossible, because the lady who served did not speak Romanian or another European language. The colleague who spoke the language does not want to communicate. The boss (the one who introduced himself to be him) uninterested.",
         "emotion": "disgust",
         "confidence": 0.9528529047966003
+    },
+    {
+        "restaurant_name": "Mama Manu BIG",
+        "review_text": "He forgets to put the sauce in the bag, too many times already. I thought it was a delivery maneuver, but apparently it is also practiced if you go to the window to order.",
+        "emotion": "neutral",
+        "confidence": 0.8339805006980896
     },
     {
         "restaurant_name": "La Mezza Luna",

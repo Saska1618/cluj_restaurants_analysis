@@ -35,9 +35,7 @@ locations_long = [
 radius = 1000
 
 restaurants = ClujRestaurants(api_key=API_KEY, locations=locations_long, radius=radius)
-restaurants.load_from_csv()
-
-ROWS_PER_PAGE = 10
+#restaurants.load_from_csv()
 
 app_ui = ui.page_navbar(  
     ui.nav_panel(
@@ -50,13 +48,16 @@ app_ui = ui.page_navbar(
                     "All the collected restaurants:",
                     ui.output_data_frame("restaurants_table"),
                     ui.row(
-                        ui.column(6,
+                        ui.column(4,
                             ui.input_action_button("refresh_btn", "Refresh Data"),
                                
                         ),
-                        ui.column(6,
-                                ui.input_action_button("scrape_data", "Scrape Data")    
-                        )
+                        # ui.column(4,
+                        #     ui.input_action_button("refresh_api", "Refresh API")  
+                        # ),
+                        # ui.column(4,
+                        #     ui.input_action_button("scrape_data", "Scrape Data")  
+                        # )
                     )
                     
                          
@@ -112,11 +113,11 @@ app_ui = ui.page_navbar(
                         ui.row(
                             ui.column(
                                 6,
-                                ui.tags.style("""
-                                    .btn{
-                                        width: 300px;
-                                    }
-                                    """),
+                                # ui.tags.style("""
+                                #     .btn{
+                                #         width: 200px;
+                                #     }
+                                #     """),
                                     ui.input_text("search_query", "", placeholder="Type a restaurant name", value="bulga"),
                                     ui.input_action_button("search_btn", "Search"
                                 )
@@ -203,9 +204,18 @@ def server(input, output, session):
     @reactive.event(input.refresh_btn, ignore_none=False)
     def restaurants_table():
 
+        global ability_to_load_data
+
+        print("BUTTON PRESSED")
+
         if ability_to_load_data:
-            print("Loading the data")
-            restaurants.full_refresh()
+            print("Refreshing the data")
+            restaurants.refresh_restaurants()
+            restaurants.load_from_csv()
+        else:
+            print("Reading the data from file")
+            restaurants.load_from_csv()
+            ability_to_load_data = True
         print("The data is loaded")
 
         df = restaurants.get_display_restaurant_data()
