@@ -1,4 +1,4 @@
-from places_api.restaurants import ClujRestaurants
+from places_api.api_together import ClujRestaurants
 from credentials.credentials_provider import get_gplaces_api_key
 
 # Example usage

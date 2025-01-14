@@ -5,17 +5,15 @@ import seaborn as sns
 
 from sklearn.cluster import KMeans
 
-import plotly.express as px
 import numpy as np
-
-import json
-import os
 
 import plotly.graph_objects as go
 
-from places_api.restaurants import ClujRestaurants, Restaurant
 from credentials.credentials_provider import get_gplaces_api_key
 from webscraping.scraper import scrape_restaurant_data
+
+from places_api.restaurant import *
+from places_api.cluj_restaurants import *
 
 ability_to_load_data = False
 
@@ -37,6 +35,7 @@ locations_long = [
 radius = 1000
 
 restaurants = ClujRestaurants(api_key=API_KEY, locations=locations_long, radius=radius)
+restaurants.load_from_csv()
 
 ROWS_PER_PAGE = 10
 
@@ -50,11 +49,17 @@ app_ui = ui.page_navbar(
                 ui.card(
                     "All the collected restaurants:",
                     ui.output_data_frame("restaurants_table"),
-                    ui.column(3,
-                        ui.input_action_button("refresh_btn", "Refresh Data"),
-                        #ui.input_action_button("scrape_data", "Scrape Data")      
+                    ui.row(
+                        ui.column(6,
+                            ui.input_action_button("refresh_btn", "Refresh Data"),
+                               
+                        ),
+                        ui.column(6,
+                                ui.input_action_button("scrape_data", "Scrape Data")    
+                        )
                     )
                     
+                         
                 )
                 
             ),
@@ -198,29 +203,12 @@ def server(input, output, session):
     @reactive.event(input.refresh_btn, ignore_none=False)
     def restaurants_table():
 
-        json_file_path = './data/reviews_with_emotions_google.json'
-
         if ability_to_load_data:
             print("Loading the data")
-            if os.path.exists(json_file_path):
-               # Delete the file
-               os.remove(json_file_path)
-            restaurants.fetch_restaurants()
-            restaurants.export_to_csv(data_file)
-            restaurants.scrape_employee_data()
-            restaurants.merge_csvs(restaurant_csv="./data/google_restaurants.csv", employee_csv="./data/employee_data.csv", merged_csv='./data/merged_data.csv')
+            restaurants.full_refresh()
         print("The data is loaded")
 
-        # Load the CSV data
-        df = pd.read_csv(data_file)
-
-        # Remove the 'reviews' column if it exists
-        if 'Reviews' in df.columns:
-            df = df.drop(columns=['Reviews', 'Place ID'])
-
-        # Add an 'index' column and move it to the leftmost position
-        df['index'] = [i for i in range(1, len(df) + 1)]
-        df = df[['index'] + [col for col in df.columns if col != 'index']]
+        df = restaurants.get_display_restaurant_data()
 
         # Return the DataFrame as a DataGrid for display
         return render.DataGrid(df, selection_mode="rows", filters=True)
@@ -229,7 +217,7 @@ def server(input, output, session):
     @reactive.event(input.refresh_btn, ignore_none=False)
     def pie_chart_ratings():
         #print("olvasom")
-        df = pd.read_csv(data_file)
+        df = restaurants.get_display_restaurant_data()
 
         # Create custom bins from 3.0 to 5.0 with a step of 0.1
         bins = [x / 10.0 for x in range(10, 52)]  # This will create bins: [3.0, 3.1, 3.2, ..., 5.0]
@@ -258,7 +246,7 @@ def server(input, output, session):
     @reactive.event(input.refresh_btn, ignore_none=False)
     def regression_dr():
         # Read the CSV data
-        df = pd.read_csv(data_file)
+        df = restaurants.get_display_restaurant_data()
 
         # Check if the necessary columns exist
         if 'Distance from Center' not in df.columns or 'Rating' not in df.columns:
@@ -290,22 +278,15 @@ def server(input, output, session):
     @render.ui
     @reactive.event(input.search_btn, ignore_none=False)
     def restaurant_details():
-        # Load the JSON data
-        with open('./data/reviews_with_emotions_google.json', 'r', encoding='utf-8') as file:
-            reviews_data = json.load(file)
 
-        query = input.search_query().strip().lower()
+        query = input.search_query()
 
-        # Filter reviews for restaurants that match the query
-        matching_reviews = [
-            review for review in reviews_data
-            if query in review['restaurant_name'].lower()
-        ]
+        selected_reviews = restaurants.get_restaurant_by_name(query).reviews
 
-        if matching_reviews:
+        if selected_reviews:
             # Group reviews by restaurant name
             grouped_reviews = {}
-            for review in matching_reviews:
+            for review in selected_reviews:
                 restaurant_name = review['restaurant_name']
                 if restaurant_name not in grouped_reviews:
                     grouped_reviews[restaurant_name] = []
@@ -331,83 +312,71 @@ def server(input, output, session):
                         f"border: 1px solid #ccc; border-radius: 5px; background-color: #f9f9f9;'>"
                         f"{formatted_reviews}</div>")
         else:
-            # If no restaurants match the query
+            #If no restaurants match the query
             return ui.HTML("<div style='padding: 10px;'>No restaurants found matching your search.</div>")
 
         
     @render.text
     @reactive.event(input.search_btn, ignore_none=False)
     def name_name():
-        df = pd.read_csv(data_file)
-        query = input.search_query().strip().lower()
-        results = df[df['Name'].str.lower().str.contains(query, na=False)]
+        query = input.search_query()
+        restaurant = restaurants.get_restaurant_by_name(query)
 
-        if len(results['Name'].tolist()) > 0:
-            return results['Name'].tolist()[0]
+        if restaurant is not None:
+            return restaurant.name
         return "No such place"
     
     @render.text
     @reactive.event(input.search_btn, ignore_none=False)
     def rating_rating():
-        df = pd.read_csv(data_file)
-        query = input.search_query().strip().lower()
-        results = df[df['Name'].str.lower().str.contains(query, na=False)]
+        query = input.search_query()
+        restaurant = restaurants.get_restaurant_by_name(query)
 
-        if len(results['Name'].tolist()) > 0:
-            return results['Rating'].tolist()[0]
+        if restaurant is not None:
+            return restaurant.rating
         return "No such place"
     
     @render.text
     @reactive.event(input.search_btn, ignore_none=False)
     def address_address():
-        df = pd.read_csv(data_file)
-        query = input.search_query().strip().lower()
-        results = df[df['Name'].str.lower().str.contains(query, na=False)]
+        query = input.search_query()
+        restaurant = restaurants.get_restaurant_by_name(query)
 
-        if len(results['Name'].tolist()) > 0:
-            return results['Address'].tolist()[0]
+        if restaurant is not None:
+            return restaurant.address
         return "No such place"
     
     @render.text
     @reactive.event(input.search_btn, ignore_none=False)
     def distance_distance():
-        df = pd.read_csv(data_file)
-        query = input.search_query().strip().lower()
-        results = df[df['Name'].str.lower().str.contains(query, na=False)]
+        query = input.search_query()
+        restaurant = restaurants.get_restaurant_by_name(query)
 
-        if len(results['Name'].tolist()) > 0:
-            return results['Distance from Center'].tolist()[0]
+        if restaurant is not None:
+            return restaurant.distance_from_city_center
         return "No such place"
     
     @render.text
     @reactive.event(input.search_btn, ignore_none=False)
     def employee_num():
-        df = pd.read_csv(data_file)
-        query = input.search_query().strip().lower()
-        results = df[df['Name'].str.lower().str.contains(query, na=False)]
+        query = input.search_query()
+        restaurant = restaurants.get_restaurant_by_name(query)
 
-        if len(results['Name'].tolist()) > 0:
-            return scrape_restaurant_data([results['Name'].tolist()[0]])
+        if restaurant is not None:
+            return restaurant.employee_num
         return "No such place"
     
     @render.plot
     @reactive.event(input.search_btn, ignore_none=False)
     def restaurant_reviews_plot():
-        # Load the JSON data for reviews
-        with open('./data/reviews_with_emotions_google.json', 'r', encoding='utf-8') as file:
-            reviews_data = json.load(file)
 
-        query = input.search_query().strip().lower()
+        query = input.search_query()
 
-        # Filter reviews for restaurants that match the query
-        matching_reviews = [
-            review for review in reviews_data
-            if query in review['restaurant_name'].lower()
-        ]
+        selected_reviews = restaurants.get_restaurant_by_name(query).reviews
 
-        if matching_reviews:
+        if selected_reviews:
             # Group reviews by emotion
-            emotions = [review['emotion'] for review in matching_reviews]
+            emotions = [review['emotion'] for review in selected_reviews]
             
             # Create a count of each emotion
             emotion_counts = pd.Series(emotions).value_counts()
@@ -437,7 +406,7 @@ def server(input, output, session):
     @reactive.event(input.num_clusters, ignore_none=False)
     def clustering_plot():
         # Load the CSV data
-        df = pd.read_csv(data_file)
+        df = restaurants.get_display_restaurant_data()
 
         # Check if the necessary columns exist
         if 'Distance from Center' not in df.columns or 'Rating' not in df.columns:
@@ -445,22 +414,17 @@ def server(input, output, session):
             return None  # Return None if the required columns are missing
 
         # Extract the relevant data for clustering
-        distances = df['Distance from Center']
-        ratings = df['Rating']
         restaurant_names = df['Name']
-        
-        # For emotions, we'll use a simple encoding scheme: map emotions to numerical values
-        with open('./data/reviews_with_emotions_google.json', 'r', encoding='utf-8') as file:
-            reviews_data = json.load(file)
 
         # Create a mapping of emotions to numerical values
         emotion_map = {'anger': 1, 'joy': 6, 'sadness': 3, 'neutral': 5, 'surprise': 4, 'disgust': 2}
         
         # Calculate the average emotion value for each restaurant
         emotion_values = []
-        for name in restaurant_names:
+        for name in restaurant_names: 
             # Get the reviews for the current restaurant
-            restaurant_reviews = [review for review in reviews_data if review['restaurant_name'].lower() == name.lower()]
+            current_restaurant = restaurants.get_restaurant_by_name(name)
+            restaurant_reviews = current_restaurant.reviews
             
             # Calculate the average emotion score for this restaurant
             if restaurant_reviews:
@@ -512,9 +476,6 @@ def server(input, output, session):
 
         # Convert Plotly figure to HTML and return it
         return ui.HTML(fig.to_html(full_html=False))
-
-
-    
 
 
 

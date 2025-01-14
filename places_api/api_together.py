@@ -4,6 +4,7 @@ import csv
 import math
 import json
 from transformers import pipeline
+import os
 
 from webscraping.scraper import scrape_restaurant_data
 
@@ -29,7 +30,7 @@ class Restaurant:
         self.reviews = []
         self.distance_from_city_center = None
 
-    def fetch_reviews(self, api_key, json_file):
+    def fetch_reviews(self, api_key, json_file=None):
         """
         Fetch reviews for this restaurant from the Google Places API.
 
@@ -64,7 +65,11 @@ class Restaurant:
                 review_data.append(review_entry)
 
         # Write to JSON file
-        self._write_to_json(json_file, review_data)
+        if json_file is not None:
+            if os.path.exists(json_file):
+               # Delete the file
+               os.remove(json_file)
+            self._write_to_json(json_file, review_data)
 
     @staticmethod
     def _write_to_json(json_file, review_data):
