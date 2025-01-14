@@ -34,6 +34,8 @@ locations_long = [
 ]
 radius = 1000
 
+color_palette = sns.color_palette("viridis", n_colors=7)
+
 restaurants = ClujRestaurants(api_key=API_KEY, locations=locations_long, radius=radius)
 #restaurants.load_from_csv()
 
@@ -169,14 +171,18 @@ app_ui = ui.page_navbar(
         ui.card(
             ui.row(
                 ui.column(
-                    2,
+                    4,
                     ui.card(
                         "Select Number of Clusters:",
                         ui.input_slider("num_clusters", "Number of Clusters", min=2, max=7, value=3)
+                    ),
+                    ui.card (
+                        "Cluster Average Ratings",
+                        ui.output_plot("cluster_avg_rating_plot")
                     )
                 ),
                 ui.column(
-                    10,
+                    8,
                     ui.tags.style("""
                         .scene{
                             height: 500px !important;
@@ -458,34 +464,142 @@ def server(input, output, session):
         kmeans = KMeans(n_clusters=num_clusters)  # Use the number of clusters selected by the user
         df['Cluster'] = kmeans.fit_predict(clustering_data)
 
+        print(df["Cluster"])
+
         # Create the 3D plot using Plotly's graph_objects
+        # fig = go.Figure()
+
+        # # Add scatter plot for clustering in 3D
+        # fig.add_trace(go.Scatter3d(
+        #     x=df['Distance from Center'],
+        #     y=df['Rating'],
+        #     z=df['Emotion'],
+        #     mode='markers',
+        #     marker=dict(color=df['Cluster'], colorscale='Viridis', size=10),
+        #     text=df['Name'],  # Display restaurant names on hover
+        #     hoverinfo='text'
+        # ))
+
+        # # Set the layout for the 3D plot
+        # fig.update_layout(
+        #     title=f'3D Clustering of Restaurants Based on Rating, Distance, and Emotions ({num_clusters} Clusters)',
+        #     scene=dict(
+        #         xaxis_title='Distance from City Center (km)',
+        #         yaxis_title='Restaurant Rating',
+        #         zaxis_title='Emotion'
+        #     ),
+        #     height=600,
+        #     showlegend=False
+        # )
+
+        # # Convert Plotly figure to HTML and return it
+        # return ui.HTML(fig.to_html(full_html=False))
+    
+        colors = cluster_colors()  # Get cluster colors
         fig = go.Figure()
 
-        # Add scatter plot for clustering in 3D
-        fig.add_trace(go.Scatter3d(
-            x=df['Distance from Center'],
-            y=df['Rating'],
-            z=df['Emotion'],
-            mode='markers',
-            marker=dict(color=df['Cluster'], colorscale='Viridis', size=10),
-            text=df['Name'],  # Display restaurant names on hover
-            hoverinfo='text'
-        ))
+        for cluster_id in range(input.num_clusters()):
+            cluster_data = df[df['Cluster'] == cluster_id]
+            fig.add_trace(go.Scatter3d(
+                x=cluster_data['Distance from Center'],
+                y=cluster_data['Rating'],
+                z=cluster_data['Emotion'],
+                mode='markers',
+                marker=dict(
+                    size=10,
+                    color=f"rgb({colors[cluster_id][0]*255},{colors[cluster_id][1]*255},{colors[cluster_id][2]*255})",
+                    opacity=0.8
+                ),
+                name=f"Cluster {cluster_id}",
+                text=cluster_data['Name'],
+                hoverinfo='text'
+            ))
 
-        # Set the layout for the 3D plot
         fig.update_layout(
-            title=f'3D Clustering of Restaurants Based on Rating, Distance, and Emotions ({num_clusters} Clusters)',
+            title="3D Clustering of Restaurants",
             scene=dict(
-                xaxis_title='Distance from City Center (km)',
-                yaxis_title='Restaurant Rating',
-                zaxis_title='Emotion'
+                xaxis_title="Distance from City Center",
+                yaxis_title="Rating",
+                zaxis_title="Emotion"
             ),
-            height=600,
-            showlegend=False
+            height=600
         )
 
-        # Convert Plotly figure to HTML and return it
         return ui.HTML(fig.to_html(full_html=False))
+    
+    @render.plot
+    @reactive.event(input.num_clusters, ignore_none=False)
+    def cluster_avg_rating_plot():
+        # Load the CSV data
+        df = restaurants.get_display_restaurant_data()
+
+        # Check if the necessary columns exist
+        if 'Distance from Center' not in df.columns or 'Rating' not in df.columns:
+            print("Error: Required columns not found in the data.")
+            return None  # Return None if the required columns are missing
+
+        # Extract the relevant data for clustering
+        restaurant_names = df['Name']
+
+        # Create a mapping of emotions to numerical values
+        emotion_map = {'anger': 1, 'joy': 6, 'sadness': 3, 'neutral': 5, 'surprise': 4, 'disgust': 2}
+        
+        # Calculate the average emotion value for each restaurant
+        emotion_values = []
+        for name in restaurant_names: 
+            # Get the reviews for the current restaurant
+            current_restaurant = restaurants.get_restaurant_by_name(name)
+            restaurant_reviews = current_restaurant.reviews
+            
+            # Calculate the average emotion score for this restaurant
+            if restaurant_reviews:
+                avg_emotion = np.mean([emotion_map.get(review['emotion'], 0) for review in restaurant_reviews])
+            else:
+                avg_emotion = 0  # No reviews, so we assign a default value
+            
+            emotion_values.append(avg_emotion)
+
+        # Add the emotion values to the dataframe
+        df['Emotion'] = emotion_values
+
+        # Remove rows with NaN values in 'Distance from Center', 'Rating', or 'Emotion'
+        df = df.dropna(subset=['Distance from Center', 'Rating', 'Emotion'])
+
+        # Prepare the data for clustering
+        clustering_data = np.array(list(zip(df['Rating'], df['Distance from Center'], df['Emotion'])))
+
+        # Perform KMeans clustering with the number of clusters from the slider
+        num_clusters = input.num_clusters()
+        kmeans = KMeans(n_clusters=num_clusters)  # Use the number of clusters selected by the user
+        df['Cluster'] = kmeans.fit_predict(clustering_data)
+
+        # Calculate average ratings for each cluster
+        avg_ratings = df.groupby('Cluster')['Rating'].mean()
+
+        colors = cluster_colors()  # Get cluster colors
+        fig, ax = plt.subplots(figsize=(8, 6))
+
+        # Bar plot with consistent colors
+        for cluster_id, avg_rating in avg_ratings.items():
+            ax.bar(
+                [f"Cluster {cluster_id}"],
+                [avg_rating],
+                color=[colors[cluster_id]],
+                edgecolor='black'
+            )
+
+        ax.set_xlabel("Cluster")
+        ax.set_ylabel("Average Rating")
+        ax.set_title("Average Ratings by Cluster")
+
+        return fig
+    
+
+    @reactive.Calc
+    def cluster_colors():
+        num_clusters = input.num_clusters()
+        return {i: color_palette[i] for i in range(num_clusters)}
+
 
 
 

@@ -5089,6 +5089,12 @@
     },
     {
         "restaurant_name": "Noodle Pack",
+        "review_text": "The staff at the cashier that I met yesterday at around 2:45pm was very rude. I politely asked for my take away and she murmured something and ignore me and turned her back to talk to a fellow employee. I politely asked again and she has the nerve to tell me that she already told me that the take away that was in the next counter from me, was mine with a very loud and rude tone. This is the first customer service that I received from a fast food chain that has rudely treated customers. Her attitude at the situation which mind you, there was only one more order in the screen besides mine so it was not busy, makes her a very rude and nasty person in general. Would not recommend to buy from this chain of noodle pack. Would not return again.",
+        "emotion": "anger",
+        "confidence": 0.6007260680198669
+    },
+    {
+        "restaurant_name": "Noodle Pack",
         "review_text": "Tasty food, good portions sizes, smooth delivery through Glovo\nNothing left for pictures 😂😂😜",
         "emotion": "neutral",
         "confidence": 0.7202083468437195
@@ -5110,12 +5116,6 @@
         "review_text": "Trash food. Ate the rice noodles with sticky tofu and it gave me watery diarheea for 24 straight hours. Not even medication helped me.\n\nGarbage location with expired food.\nYou are lucky I’m not suing :)",
         "emotion": "disgust",
         "confidence": 0.780015766620636
-    },
-    {
-        "restaurant_name": "Noodle Pack",
-        "review_text": "I've seen amongst the other reviews that somebody said they got little to no crispy chicken pieces when they ordered something that involved crispy chicken. Well I'm here to vouch for that. I've ordered a large noodle crispy chicken menu and not only did my cardboard pack contain 5% crispy chicken and 95% noodles but the crispy pieces were rock solid and pale as though the crust wasn't fresh. The saying is \"never say never\" but I highly doubt I'll eat here again. Oh and.. Wasn't convinced about the flavors. I think they were too extra to be honest.",
-        "emotion": "neutral",
-        "confidence": 0.708844006061554
     },
     {
         "restaurant_name": "Paprika",
@@ -5353,9 +5353,9 @@
     },
     {
         "restaurant_name": "Rachel's Filipino Food",
-        "review_text": "Caming back from Thailand, i was really missing asian food, and i was very surprised by the taste of the dishes here! Really excellent, i loved it so much. I will try all the dishes! Thank you ",
-        "emotion": "surprise",
-        "confidence": 0.9586140513420105
+        "review_text": "The food was excellent, and Rachel was super nice. The Shanghai rolls were a bit like fried pancakes and were 10 leagues above the frozen spring rolls you find in most other Asian places in Cluj. I also highly recommend the pork liempo!",
+        "emotion": "joy",
+        "confidence": 0.6252388954162598
     },
     {
         "restaurant_name": "MOTIKO ICE CREAM",
